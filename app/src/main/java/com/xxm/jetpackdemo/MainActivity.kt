@@ -1,44 +1,39 @@
 package com.xxm.jetpackdemo
 
 import android.os.Bundle
-import android.widget.Button
-import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
-import androidx.lifecycle.Observer
-import com.xxm.jetpackdemo.viewmodel.LoginViewModel
-import java.util.*
+import androidx.navigation.NavController
+import androidx.navigation.fragment.NavHostFragment
+import androidx.navigation.ui.setupWithNavController
+import com.google.android.material.bottomnavigation.BottomNavigationView
 
-// TODO  修改主界面
 class MainActivity : AppCompatActivity() {
-    //lateinit定义的变量可以不用初始化
-    lateinit var model: LoginViewModel
+    lateinit var bottomNavigationView: BottomNavigationView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+        val host: NavHostFragment =
+            supportFragmentManager.findFragmentById(R.id.my_nav_host_fragment) as NavHostFragment
+        val navController = host.navController
+
         initWidget()
+        initBottomNavigationView(bottomNavigationView,navController)
     }
 
+
+    /**
+     * 关联底部导航栏，使之能够点击切换页面
+     */
+    private fun initBottomNavigationView(bottomNavigationView: BottomNavigationView ,navController: NavController) {
+        bottomNavigationView.setupWithNavController(navController)
+    }
+
+    /**
+     * 初始化控件
+     */
     private fun initWidget() {
-        model = LoginViewModel()
-
-        val btn = findViewById<Button>(R.id.btn_random)
-        val text = findViewById<TextView>(R.id.tv_content)
-
-        btn.setOnClickListener {
-            model.data.value = UUID.randomUUID().toString()
-        }
-
-        model.data.observe(this, object : Observer<String> {
-            override fun onChanged(t: String?) {
-                t?.let {
-                    text.text = it
-                }
-            }
-
-        })
-
-
+        bottomNavigationView = findViewById(R.id.navigation_view)
     }
 }

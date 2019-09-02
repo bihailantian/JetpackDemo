@@ -26,15 +26,15 @@ class FirstFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val safeArgs: FirstFragmentArgs by navArgs()
-        val flowStepNum = safeArgs.flowStepNum
-
-        Toast.makeText(context, "num:" + flowStepNum, Toast.LENGTH_SHORT).show()
-
-        val btnStart: Button = view.findViewById(R.id.btn_next)
-        btnStart.setOnClickListener {
-            NavHostFragment.findNavController(this).navigate(R.id.secondFragment, null)
-        }
+//        val safeArgs: FirstFragmentArgs by navArgs()
+//        val flowStepNum = safeArgs.flowStepNum
+//
+//        Toast.makeText(context, "num:" + flowStepNum, Toast.LENGTH_SHORT).show()
+//
+//        val btnStart: Button = view.findViewById(R.id.btn_next)
+//        btnStart.setOnClickListener {
+//            NavHostFragment.findNavController(this).navigate(R.id.secondFragment, null)
+//        }
 
     }
 
