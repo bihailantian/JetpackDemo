@@ -1,23 +1,48 @@
 package com.xxm.jetpackdemo
 
 import android.os.Bundle
+import android.view.Menu
+import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.Toolbar
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
+import androidx.navigation.findNavController
 import androidx.navigation.fragment.NavHostFragment
+import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.NavigationUI
+import androidx.navigation.ui.onNavDestinationSelected
+import androidx.navigation.ui.setupActionBarWithNavController
 import com.google.android.material.bottomnavigation.BottomNavigationView
 
 class SecondActivity : AppCompatActivity() {
 
+    private lateinit var appBarConfiguration: AppBarConfiguration
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_second)
-//        val host: NavHostFragment =  supportFragmentManager.findFragmentById(R.id.my_nav_host_fragment) as NavHostFragment
-//        val navController = host.navController
-//
-//        setupBottomNavMenu(navController)
 
+        val toolbar = findViewById<Toolbar>(R.id.toolbar)
+        setSupportActionBar(toolbar)
+
+
+        val host: NavHostFragment = supportFragmentManager.findFragmentById(R.id.my_nav_host_fragment) as NavHostFragment
+        val navController = host.navController
+
+        appBarConfiguration = AppBarConfiguration(navController.graph)
+
+        setActionBar(navController,appBarConfiguration)
+
+        setupBottomNavMenu(navController)
+
+    }
+
+    /**
+     * 设置ActionBar
+     */
+    private fun setActionBar(navController: NavController,appBarConfig: AppBarConfiguration){
+        setupActionBarWithNavController(navController,appBarConfig)
     }
 
     private fun setupBottomNavMenu(navController: NavController) {
@@ -33,9 +58,16 @@ class SecondActivity : AppCompatActivity() {
         }*/
     }
 
-//    override fun onSupportNavigateUp() = Navigation.findNavController(
-//        this,
-//        R.id.my_nav_host_fragment
-//    ).navigateUp()
 
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.overflow_menu, menu)
+        return true
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return item.onNavDestinationSelected(findNavController(R.id.my_nav_host_fragment))
+                || super.onOptionsItemSelected(item)
+    }
+
+    override fun onSupportNavigateUp() = Navigation.findNavController(this, R.id.my_nav_host_fragment).navigateUp()
 }
