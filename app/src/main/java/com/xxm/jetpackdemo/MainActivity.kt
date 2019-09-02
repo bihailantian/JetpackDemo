@@ -8,6 +8,7 @@ import androidx.lifecycle.Observer
 import com.xxm.jetpackdemo.viewmodel.LoginViewModel
 import java.util.*
 
+// TODO  修改主界面
 class MainActivity : AppCompatActivity() {
     //lateinit定义的变量可以不用初始化
     lateinit var model: LoginViewModel
