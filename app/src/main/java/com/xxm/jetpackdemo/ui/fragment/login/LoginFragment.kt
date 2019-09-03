@@ -29,8 +29,15 @@ class LoginFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        val binding: FragmentLoginBinding =
-            DataBindingUtil.inflate(inflater, R.layout.fragment_login, container, false)
+//        val binding: FragmentLoginBinding =
+//            DataBindingUtil.inflate(inflater, R.layout.fragment_login, container, false)
+
+        val binding = FragmentLoginBinding.inflate(
+            inflater
+            , container
+            , false
+        )
+
 
         loginModel = LoginModel("", "", context!!)
         binding.model = loginModel
