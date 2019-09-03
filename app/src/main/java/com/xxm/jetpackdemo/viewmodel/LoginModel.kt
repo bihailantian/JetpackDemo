@@ -7,11 +7,12 @@ import android.widget.EditText
 import android.widget.Toast
 import androidx.databinding.BindingAdapter
 import androidx.databinding.ObservableField
+import androidx.lifecycle.ViewModel
 import com.xxm.jetpackdemo.MainActivity
 import com.xxm.jetpackdemo.common.BaseConstant
 import com.xxm.jetpackdemo.common.listener.SimpleWatcher
 
-class LoginModel constructor(name: String, pwd: String, context: Context) {
+class LoginModel constructor(name: String, pwd: String, context: Context):ViewModel() {
 
     val n = ObservableField<String>(name) //名称
     val p = ObservableField<String>(pwd)  //密码

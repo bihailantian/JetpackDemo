@@ -63,7 +63,7 @@
             android:onTextChanged="@{(text, start, before, count)->model.onNameChanged(text)}"
             android:paddingStart="10dp"
             android:paddingEnd="10dp"
-            android:text="@{model.n.get()}"
+            android:text="@={model.n.get()}"
             app:addTextChangedListener="@{model.nameWatcher}"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintBottom_toTopOf="@+id/et_pwd"
