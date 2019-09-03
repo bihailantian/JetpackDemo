@@ -6,46 +6,65 @@ import android.text.Editable
 import android.widget.EditText
 import android.widget.Toast
 import androidx.databinding.BindingAdapter
-import androidx.databinding.ObservableField
+import androidx.lifecycle.LifecycleOwner
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.xxm.jetpackdemo.MainActivity
 import com.xxm.jetpackdemo.common.BaseConstant
 import com.xxm.jetpackdemo.common.listener.SimpleWatcher
+import com.xxm.jetpackdemo.db.repository.UserRepository
 
-class LoginModel constructor(name: String, pwd: String, context: Context):ViewModel() {
+class LoginModel constructor(
+    private val repository: UserRepository,
+    private val context: Context
+) : ViewModel() {
 
-    val n = ObservableField<String>(name) //名称
-    val p = ObservableField<String>(pwd)  //密码
-    var context: Context = context
+
+    companion object {
+        @JvmStatic
+        @BindingAdapter("addTextChangedListener")
+        fun addTextChangedListener(editText: EditText, simpleWatcher: SimpleWatcher) {
+            editText.addTextChangedListener(simpleWatcher)
+        }
+    }
+
+    val n = MutableLiveData<String>("") //名称
+    val p = MutableLiveData<String>("")  //密码
+
+    lateinit var lifecycleOwner: LifecycleOwner
 
     /**
      * 用户名改变回调的函数
      */
     fun onNameChanged(s: CharSequence) {
-        n.set(s.toString())
+        //n.set(s.toString())
+        n.value = s.toString()
     }
 
     /**
      * 密码改变的回调函数
      */
     fun onPwdChanged(s: CharSequence, start: Int, before: Int, count: Int) {
-        p.set(s.toString())
+        //p.set(s.toString())
+        p.value = s.toString()
     }
 
-
     fun login() {
-        if (n.get().equals(BaseConstant.USER_NAME) && p.get().equals(BaseConstant.USER_PWD)) {
+        if (n.value.equals(BaseConstant.USER_NAME)
+            && p.value.equals(BaseConstant.USER_PWD)
+        ) {
             Toast.makeText(context, "账号密码正确", Toast.LENGTH_SHORT).show()
             val intent = Intent(context, MainActivity::class.java)
             context.startActivity(intent)
         }
     }
+
     // SimpleWatcher 是简化了的TextWatcher
     val nameWatcher = object : SimpleWatcher() {
-
         override fun afterTextChanged(s: Editable) {
             super.afterTextChanged(s)
-            n.set(s.toString())
+
+            n.value = s.toString()
         }
     }
 
@@ -53,12 +72,9 @@ class LoginModel constructor(name: String, pwd: String, context: Context):ViewMo
         override fun afterTextChanged(s: Editable) {
             super.afterTextChanged(s)
 
-            p.set(s.toString())
+            //p.set(s.toString())
+            p.value = s.toString()
         }
     }
 
-    @BindingAdapter("addTextChangedListener")
-    fun addTextChangedListener(editText: EditText, simpleWatcher: SimpleWatcher) {
-        editText.addTextChangedListener(simpleWatcher)
-    }
 }

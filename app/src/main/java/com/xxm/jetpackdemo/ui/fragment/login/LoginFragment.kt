@@ -8,8 +8,11 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
+import androidx.lifecycle.Observer
 import com.xxm.jetpackdemo.R
 import com.xxm.jetpackdemo.databinding.FragmentLoginBinding
+import com.xxm.jetpackdemo.viewmodel.CustomViewModelProvider
 import com.xxm.jetpackdemo.viewmodel.LoginModel
 
 
@@ -21,7 +24,11 @@ class LoginFragment : Fragment() {
 //    lateinit var mLogin: Button
 //    lateinit var mAccount: EditText
 
-    lateinit var loginModel: LoginModel
+    private val loginModel: LoginModel by viewModels{
+        CustomViewModelProvider.providerLoginModel(requireContext())
+    }
+    var isEnable: Boolean = false
+    lateinit var binding: FragmentLoginBinding
 
 
     override fun onCreateView(
@@ -29,19 +36,24 @@ class LoginFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-//        val binding: FragmentLoginBinding =
-//            DataBindingUtil.inflate(inflater, R.layout.fragment_login, container, false)
-
-        val binding = FragmentLoginBinding.inflate(
+        val binding: FragmentLoginBinding = DataBindingUtil.inflate(
             inflater
+            , R.layout.fragment_login
             , container
             , false
         )
 
+        /*val binding = FragmentLoginBinding.inflate(
+            inflater
+            , container
+            , false
+        )*/
 
-        loginModel = LoginModel("", "", context!!)
+        loginModel.lifecycleOwner = viewLifecycleOwner
         binding.model = loginModel
+        binding.isEnable = isEnable
         binding.activity = activity //必须绑定activity才能调用activity的方法
+        this.binding = binding
         return binding.root
     }
 
@@ -49,22 +61,15 @@ class LoginFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-//        mCancel = view.findViewById(R.id.txt_cancel)
-//        mLogin = view.findViewById(R.id.btn_login)
-//        mAccount = view.findViewById(R.id.et_account)
 
-//        mLogin.setOnClickListener {
-//            val intent = Intent(context, MainActivity::class.java)
-//            context!!.startActivity(intent)
-//        }
-//
-//        mCancel.setOnClickListener {
-//            activity?.onBackPressed()
-//        }
+        //登录按钮是否可点击
+        loginModel.p.observe(viewLifecycleOwner, Observer {
+            binding.isEnable = it.isNotEmpty() && loginModel.n.value!!.isNotEmpty()
+        })
 
         val name = arguments?.getString("name")
-        if (TextUtils.isEmpty(name!!))
-            loginModel.n.set(name)
+        if (TextUtils.isEmpty(name))
+            loginModel.n.value = name!!
 
     }
 

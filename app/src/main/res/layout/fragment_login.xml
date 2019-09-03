@@ -3,6 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
+
         <variable
             name="model"
             type="com.xxm.jetpackdemo.viewmodel.LoginModel" />
@@ -10,6 +11,10 @@
         <variable
             name="activity"
             type="androidx.fragment.app.FragmentActivity" />
+
+        <variable
+            name="isEnable"
+            type="Boolean" />
 
         <import type="android.view.View" />
     </data>
@@ -63,7 +68,7 @@
             android:onTextChanged="@{(text, start, before, count)->model.onNameChanged(text)}"
             android:paddingStart="10dp"
             android:paddingEnd="10dp"
-            android:text="@={model.n.get()}"
+            android:text="@={model.n}"
             app:addTextChangedListener="@{model.nameWatcher}"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintBottom_toTopOf="@+id/et_pwd"
@@ -89,7 +94,7 @@
             android:onTextChanged="@{model::onPwdChanged}"
             android:paddingStart="10dp"
             android:paddingEnd="10dp"
-            android:text="@{model.p.get()}"
+            android:text="@{model.p}"
             app:layout_constraintBottom_toTopOf="@+id/btn_login"
             app:layout_constraintHeight_default="percent"
             app:layout_constraintHeight_percent="0.1"
@@ -107,7 +112,7 @@
             android:layout_marginStart="20dp"
             android:layout_marginEnd="20dp"
             android:background="@drawable/shape_main_recycle_item_primary"
-            android:enabled="@{(model.p.get().isEmpty()||model.n.get().isEmpty()) ? false : true}"
+            android:enabled="@{isEnable}"
             android:onClick="@{() -> model.login()}"
             android:text="Sign in"
             android:textSize="@dimen/txt_big_size"
