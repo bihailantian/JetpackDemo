@@ -6,9 +6,9 @@
     app:startDestination="@id/infoFragment">
     <fragment
         android:id="@+id/infoFragment"
-        android:name="com.xxm.jetpackdemo.ui.fragment.main.InfoFragment"
-        android:label="fragment_info"
-        tools:layout="@layout/fragment_info">
+        android:name="com.xxm.jetpackdemo.ui.fragment.main.ShoeFragment"
+        android:label="ShoeFragment"
+        tools:layout="@layout/fragment_shoe">
 
     </fragment>
 
