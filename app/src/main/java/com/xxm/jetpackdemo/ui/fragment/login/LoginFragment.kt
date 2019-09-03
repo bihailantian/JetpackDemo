@@ -34,7 +34,7 @@ class LoginFragment : Fragment() {
 
         loginModel = LoginModel("", "", context!!)
         binding.model = loginModel
-
+        binding.activity = activity //必须绑定activity才能调用activity的方法
         return binding.root
     }
 

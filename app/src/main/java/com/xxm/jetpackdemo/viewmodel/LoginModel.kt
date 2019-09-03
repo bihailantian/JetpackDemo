@@ -39,7 +39,7 @@ class LoginModel constructor(name: String, pwd: String, context: Context) {
             context.startActivity(intent)
         }
     }
-
+    // SimpleWatcher 是简化了的TextWatcher
     val nameWatcher = object : SimpleWatcher() {
 
         override fun afterTextChanged(s: Editable) {
