@@ -19,11 +19,14 @@ import com.xxm.jetpackdemo.utils.ShoeWorker
 /**
  * 数据库文件
  */
-@Database(entities = [User::class, Shoe::class, FavouriteShoe::class],version = 1,exportSchema = false)
-@TypeConverters(Converters::class)
+@Database(entities = [User::class, Shoe::class, FavouriteShoe::class],version = 1,exportSchema = false) //生成表
+@TypeConverters(Converters::class) // 转换不确定值
 abstract class AppDataBase : RoomDatabase() {
+    // 得到UserDao
     abstract fun userDao(): UserDao
+    // 得到ShoeDao
     abstract fun shoeDao(): ShoeDao
+    // 得到FavouriteShoeDao
     abstract fun favouriteShoeDao(): FavouriteShoeDao
 
 
