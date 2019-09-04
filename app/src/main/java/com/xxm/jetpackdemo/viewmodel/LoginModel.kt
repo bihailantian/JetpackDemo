@@ -3,22 +3,21 @@ package com.xxm.jetpackdemo.viewmodel
 import android.content.Context
 import android.content.Intent
 import android.text.Editable
+import android.text.TextUtils
 import android.widget.EditText
 import android.widget.Toast
 import androidx.databinding.BindingAdapter
-import androidx.lifecycle.LifecycleOwner
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
+import androidx.lifecycle.*
 import com.xxm.jetpackdemo.MainActivity
 import com.xxm.jetpackdemo.common.BaseConstant
 import com.xxm.jetpackdemo.common.listener.SimpleWatcher
 import com.xxm.jetpackdemo.db.repository.UserRepository
+import com.xxm.jetpackdemo.utils.AppPrefsUtils
 
 class LoginModel constructor(
-    private val repository: UserRepository,
-    private val context: Context
+    private val repository: UserRepository
+    , private val context: Context
 ) : ViewModel() {
-
 
     companion object {
         @JvmStatic
@@ -50,12 +49,25 @@ class LoginModel constructor(
     }
 
     fun login() {
-        if (n.value.equals(BaseConstant.USER_NAME)
-            && p.value.equals(BaseConstant.USER_PWD)
+        if (!TextUtils.isEmpty(n.value)
+            && !TextUtils.isEmpty(p.value)
         ) {
-            Toast.makeText(context, "账号密码正确", Toast.LENGTH_SHORT).show()
-            val intent = Intent(context, MainActivity::class.java)
-            context.startActivity(intent)
+            val pwd = p.value!!
+            val account = n.value!!
+            repository.login(account, pwd).observe(lifecycleOwner, Observer {
+                if (it != null) {
+                    AppPrefsUtils.putLong(BaseConstant.SP_USER_ID, it.id)
+                    val intent = Intent(context, MainActivity::class.java)
+                    context.startActivity(intent)
+                    Toast.makeText(context, "登录成功！", Toast.LENGTH_SHORT).show()
+                }
+            })
+            /*viewModelScope.launch {
+                val u =  repository.login(account,pwd)
+                if(u != null){
+                    Toast.makeText(context,"登录成功！",Toast.LENGTH_SHORT).show()
+                }
+            }*/
         }
     }
 

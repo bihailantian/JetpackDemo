@@ -18,4 +18,8 @@ data class Shoe(
     @PrimaryKey(autoGenerate = true)
     @ColumnInfo(name = "id")
     var id: Long = 0
+
+    fun getPriceStr():String{
+        return price.toString()
+    }
 }

@@ -7,12 +7,17 @@ import com.xxm.jetpackdemo.db.data.Shoe
 
 class ShoeRepository private constructor(private val shoeDao: ShoeDao) {
 
-    fun getAllShoes() = shoeDao.getAllShoes()
+    /**
+     * 通过Id查询一双鞋
+     */
+    fun getShoeById(id:Long) = shoeDao.findShoeByIdLD(id)
+
+    fun getAllShoes() = shoeDao.getAllShoesLD()
 
     /**
      * 通过品牌查询鞋子
      */
-    fun getShoesByBrand(brand:String) = shoeDao.findShoeByBrand(brand)
+    fun getShoesByBrand(brand:String) = shoeDao.findShoesByBrandLD(brand)
 
     /**
      * 插入鞋子的集合

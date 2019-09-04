@@ -1,6 +1,7 @@
 package com.xxm.jetpackdemo.db
 
 import android.content.Context
+import com.xxm.jetpackdemo.db.repository.FavouriteShoeRepository
 import com.xxm.jetpackdemo.db.repository.ShoeRepository
 import com.xxm.jetpackdemo.db.repository.UserRepository
 
@@ -18,6 +19,13 @@ object RepositoryProvider {
      */
     fun providerShoeRepository(context: Context): ShoeRepository {
        return ShoeRepository.getInstance(AppDataBase.getInstance(context).shoeDao())
+    }
+
+    /**
+     * 得到收藏记录的仓库
+     */
+    fun providerFavouriteShoeRepository(context: Context):FavouriteShoeRepository{
+        return FavouriteShoeRepository.getInstance(AppDataBase.getInstance(context).favouriteShoeDao())
     }
 
 

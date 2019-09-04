@@ -31,10 +31,10 @@ class ShoeFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         val binding: FragmentShoeBinding = FragmentShoeBinding.inflate(inflater, container, false)
-        context ?: return binding.root
+        context?: return binding.root
 
         // RecyclerView 的适配器 ShoeAdapter
-        val adapter = ShoeAdapter()
+        val adapter = ShoeAdapter(context!!)
         binding.recycler.adapter = adapter
         onSubscribeUi(adapter)
         return binding.root
