@@ -91,6 +91,7 @@
             android:drawableStart="@drawable/common_ic_pwd"
             android:drawablePadding="10dp"
             android:hint="password"
+            android:inputType="textPassword"
             android:onTextChanged="@{model::onPwdChanged}"
             android:paddingStart="10dp"
             android:paddingEnd="10dp"
