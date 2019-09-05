@@ -12,6 +12,16 @@ import kotlinx.coroutines.withContext
 class UserRepository private constructor(private val userDao: UserDao) {
 
     /**
+     * 更新用户
+     */
+    suspend fun updateUser(user:User) {
+        withContext(IO){
+            userDao.updateUser(user)
+        }
+    }
+
+
+    /**
      * 获取所有的用户
      */
     fun getAllUsers() = userDao.getAllUsers()
@@ -31,7 +41,7 @@ class UserRepository private constructor(private val userDao: UserDao) {
      */
     suspend fun register(email: String, account: String, pwd: String):Long {
         return withContext(IO) {
-            userDao.insertUser(User(account, pwd, email))
+            userDao.insertUser(User(account, pwd, email,"https://raw.githubusercontent.com/mCyp/Photo/master/1560651318109.jpeg"))
         }
     }
 

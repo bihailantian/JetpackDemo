@@ -9,6 +9,7 @@ data class User(
     @ColumnInfo(name = "user_account") val account: String,
     @ColumnInfo(name = "user_pwd") val pwd: String,
     @ColumnInfo(name = "user_name") val name: String
+    , @ColumnInfo(name = "user_url") var headImage:String // 头像地址
 ) {
 
     @PrimaryKey(autoGenerate = true)

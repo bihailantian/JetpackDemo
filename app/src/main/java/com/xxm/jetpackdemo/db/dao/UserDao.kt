@@ -1,10 +1,7 @@
 package com.xxm.jetpackdemo.db.dao
 
 import androidx.lifecycle.LiveData
-import androidx.room.Dao
-import androidx.room.Delete
-import androidx.room.Insert
-import androidx.room.Query
+import androidx.room.*
 import com.xxm.jetpackdemo.db.data.User
 
 /**
@@ -27,4 +24,7 @@ interface UserDao {
 
     @Delete
     fun deleteUser(user: User)
+
+    @Update
+    fun updateUser(user:User)
 }

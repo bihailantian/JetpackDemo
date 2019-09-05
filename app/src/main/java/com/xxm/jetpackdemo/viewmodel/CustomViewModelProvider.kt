@@ -43,4 +43,10 @@ object CustomViewModelProvider  {
         return FavouriteModelFactory(repository,userId)
     }
 
+    fun providerMeModel(context: Context):MeModelFactory{
+        val repository:UserRepository = RepositoryProvider.providerUserRepository(context)
+        return MeModelFactory(repository)
+    }
+
+
 }

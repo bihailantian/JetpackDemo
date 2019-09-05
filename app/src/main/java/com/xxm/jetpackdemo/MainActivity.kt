@@ -1,6 +1,8 @@
 package com.xxm.jetpackdemo
 
 import android.os.Bundle
+import android.view.View
+import android.widget.ImageView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import androidx.navigation.NavController
@@ -11,6 +13,7 @@ import com.google.android.material.bottomnavigation.BottomNavigationView
 class MainActivity : AppCompatActivity() {
     lateinit var bottomNavigationView: BottomNavigationView
     lateinit var mToolbar: Toolbar
+    lateinit var mCamera: ImageView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -30,6 +33,12 @@ class MainActivity : AppCompatActivity() {
      */
     private fun initBottomNavigationView(bottomNavigationView: BottomNavigationView ,navController: NavController) {
         bottomNavigationView.setupWithNavController(navController)
+        navController.addOnDestinationChangedListener { controller, destination, arguments ->
+            when(destination.id){  //在meFragment显示拍照图标
+                R.id.meFragment -> mCamera.visibility = View.VISIBLE
+                else -> mCamera.visibility = View.GONE
+            }
+        }
     }
 
     /**
@@ -38,5 +47,6 @@ class MainActivity : AppCompatActivity() {
     private fun initWidget() {
         bottomNavigationView = findViewById(R.id.navigation_view)
         mToolbar = findViewById(R.id.toolbar)
+        mCamera = findViewById(R.id.iv_camera)
     }
 }
