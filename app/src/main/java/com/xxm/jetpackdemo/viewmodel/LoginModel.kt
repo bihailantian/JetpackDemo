@@ -7,7 +7,10 @@ import android.text.TextUtils
 import android.widget.EditText
 import android.widget.Toast
 import androidx.databinding.BindingAdapter
-import androidx.lifecycle.*
+import androidx.lifecycle.LifecycleOwner
+import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModel
 import com.xxm.jetpackdemo.MainActivity
 import com.xxm.jetpackdemo.common.BaseConstant
 import com.xxm.jetpackdemo.common.listener.SimpleWatcher

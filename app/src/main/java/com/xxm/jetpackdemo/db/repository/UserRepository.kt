@@ -3,7 +3,6 @@ package com.xxm.jetpackdemo.db.repository
 import androidx.lifecycle.LiveData
 import com.xxm.jetpackdemo.db.dao.UserDao
 import com.xxm.jetpackdemo.db.data.User
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Dispatchers.IO
 import kotlinx.coroutines.withContext
 

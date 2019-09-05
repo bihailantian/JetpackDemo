@@ -2,34 +2,21 @@ package com.xxm.jetpackdemo.ui.adapter
 
 import android.content.Context
 import android.content.Intent
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.xxm.jetpackdemo.common.BaseConstant
-import com.xxm.jetpackdemo.databinding.RecyclerItemShoeBinding
+import com.xxm.jetpackdemo.databinding.RecyclerItemFavouriteBinding
 import com.xxm.jetpackdemo.db.data.Shoe
 import com.xxm.jetpackdemo.ui.activity.DetailActivity
 
-/**
- * 鞋子的适配器
- */
-class ShoeAdapter constructor(val context: Context) :
-    ListAdapter<Shoe, ShoeAdapter.ViewHolder>(ShoeDiffCallback()) {
+class FavouriteAdapter constructor(val context: Context) :
+    ListAdapter<Shoe, FavouriteAdapter.FavouriteViewHolder>(ShoeDiffCallback()) {
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        return ViewHolder(
-            RecyclerItemShoeBinding.inflate(
-                LayoutInflater.from(parent.context)
-                , parent
-                , false
-            )
-        )
-    }
 
-    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: FavouriteViewHolder, position: Int) {
         val shoe = getItem(position)
         holder.apply {
             bind(onCreateListener(shoe.id), shoe)
@@ -42,25 +29,31 @@ class ShoeAdapter constructor(val context: Context) :
      */
     private fun onCreateListener(id: Long): View.OnClickListener {
         return View.OnClickListener {
-            Log.e("TAG", "点击了：" + id)
-            //Toast.makeText(context,"点击了：" + id,Toast.LENGTH_SHORT).show()
             val intent = Intent(context, DetailActivity::class.java)
             intent.putExtra(BaseConstant.DETAIL_SHOE_ID, id)
             context.startActivity(intent)
         }
     }
 
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): FavouriteViewHolder {
+        return FavouriteViewHolder(
+            RecyclerItemFavouriteBinding.inflate(
+                LayoutInflater.from(parent.context)
+                , parent
+                , false
+            )
+        )
+    }
 
-    class ViewHolder(private val binding: RecyclerItemShoeBinding) :
+    class FavouriteViewHolder(private val binding: RecyclerItemFavouriteBinding) :
         RecyclerView.ViewHolder(binding.root) {
-
         fun bind(listener: View.OnClickListener, item: Shoe) {
             binding.apply {
                 this.listener = listener
                 this.shoe = item
+                this.price = item.price.toString()
                 executePendingBindings()
             }
         }
     }
 }
-

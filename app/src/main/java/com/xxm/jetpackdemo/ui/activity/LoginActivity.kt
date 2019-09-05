@@ -2,9 +2,9 @@ package com.xxm.jetpackdemo.ui.activity
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import com.xxm.jetpackdemo.utils.AppPrefsUtils
 import com.xxm.jetpackdemo.R
 import com.xxm.jetpackdemo.common.BaseConstant
+import com.xxm.jetpackdemo.utils.AppPrefsUtils
 
 class LoginActivity : AppCompatActivity() {
 

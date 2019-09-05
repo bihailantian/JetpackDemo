@@ -2,14 +2,13 @@ package com.xxm.jetpackdemo.viewmodel
 
 import android.content.Context
 import androidx.navigation.NavController
+import com.xxm.jetpackdemo.common.BaseConstant
 import com.xxm.jetpackdemo.db.RepositoryProvider
 import com.xxm.jetpackdemo.db.repository.FavouriteShoeRepository
 import com.xxm.jetpackdemo.db.repository.ShoeRepository
 import com.xxm.jetpackdemo.db.repository.UserRepository
-import com.xxm.jetpackdemo.viewmodel.factory.FavouriteShoeModelFactory
-import com.xxm.jetpackdemo.viewmodel.factory.LoginModelFactory
-import com.xxm.jetpackdemo.viewmodel.factory.RegisterModelFactory
-import com.xxm.jetpackdemo.viewmodel.factory.ShoeModelFactory
+import com.xxm.jetpackdemo.utils.AppPrefsUtils
+import com.xxm.jetpackdemo.viewmodel.factory.*
 
 object CustomViewModelProvider  {
 
@@ -37,4 +36,11 @@ object CustomViewModelProvider  {
         val favShoeRepository: FavouriteShoeRepository = RepositoryProvider.providerFavouriteShoeRepository(context)
         return FavouriteShoeModelFactory(repository, favShoeRepository, shoeId, userId)
     }
+
+    fun providerFavouriteModel(context: Context): FavouriteModelFactory {
+        val repository: ShoeRepository = RepositoryProvider.providerShoeRepository(context)
+        val userId:Long = AppPrefsUtils.getLong(BaseConstant.SP_USER_ID)
+        return FavouriteModelFactory(repository,userId)
+    }
+
 }

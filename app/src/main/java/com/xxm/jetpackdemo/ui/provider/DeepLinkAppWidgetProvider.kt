@@ -5,9 +5,6 @@ import android.appwidget.AppWidgetProvider
 import android.content.Context
 import android.os.Bundle
 import android.util.Log
-import android.widget.RemoteViews
-import androidx.navigation.NavDeepLinkBuilder
-import com.xxm.jetpackdemo.R
 
 class DeepLinkAppWidgetProvider : AppWidgetProvider() {
     private val TAG = DeepLinkAppWidgetProvider::class.java.simpleName

@@ -8,6 +8,19 @@ import com.xxm.jetpackdemo.db.data.Shoe
 class ShoeRepository private constructor(private val shoeDao: ShoeDao) {
 
     /**
+     * 查询用户收藏的鞋
+     */
+    fun getShoesByUserId(userId:Long) = shoeDao.findShoesByUserId(userId)
+
+
+
+    /**
+     * 通过id的范围寻找鞋子
+     */
+    fun getPageShoes(startIndex:Long,endIndex:Long):List<Shoe> = shoeDao.findShoesByIndexRange(startIndex,endIndex)
+
+
+    /**
      * 通过Id查询一双鞋
      */
     fun getShoeById(id:Long) = shoeDao.findShoeByIdLD(id)
