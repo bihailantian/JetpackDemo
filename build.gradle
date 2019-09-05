@@ -6,10 +6,11 @@ buildscript {
     ext.lifecycleVersion = '2.2.0-alpha03'
     ext.roomVersion = '2.2.0-beta01'
     ext.coroutinesVersion = "1.1.1"
-    ext.fragmentVersion = '1.1.0-alpha09'
+    ext.fragmentVersion = '1.2.0-alpha02'
     ext.gsonVersion = '2.8.2'
     ext.glideVersion = '4.9.0'
-    ext.workVersion = '2.1.0-alpha02'
+    ext.workVersion = '2.3.0-alpha01'
+    ext.pagingVersion = '2.1.0'
 
     repositories {
         google()

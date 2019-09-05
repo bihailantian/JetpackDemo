@@ -14,4 +14,7 @@ object BaseConstant {
 
     // DetailActivity 传输的数据
     const val DETAIL_SHOE_ID = "detail_shoe_id"
+
+    // 单个页面大小
+    const val SINGLE_PAGE_SIZE = 10
 }
