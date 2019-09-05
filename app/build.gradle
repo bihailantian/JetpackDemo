@@ -69,4 +69,8 @@ dependencies {
 
     implementation "jp.wasabeef:glide-transformations:$rootProject.trasnVersion"
     implementation "androidx.work:work-runtime-ktx:$rootProject.workVersion"
+
+    // SweetDialog
+    implementation "com.github.f0ris.sweetalert:library:$rootProject.sweetVersion"
+
 }

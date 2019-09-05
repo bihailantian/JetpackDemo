@@ -48,8 +48,11 @@ class MeModel(val userRepository: UserRepository) : ViewModel() {
             continuation = continuation.then(builder.build())
         }
 
+        // 构建约束条件
         val constraints = Constraints.Builder()
-            .setRequiresBatteryNotLow(true)
+            .setRequiresBatteryNotLow(true) // 非电池低电量
+            .setRequiredNetworkType(NetworkType.CONNECTED) // 网络连接的情况
+            .setRequiresStorageNotLow(true) // 存储空间足
             .build()
 
         // 储存照片
@@ -84,6 +87,12 @@ class MeModel(val userRepository: UserRepository) : ViewModel() {
     internal fun setImageUri(uri: String?) {
         imageUri = uriOrNull(uri)
     }
+
+
+    fun cancelWork() {
+        workManager.cancelUniqueWork(IMAGE_MANIPULATION_WORK_NAME)
+    }
+
 
     internal fun setOutputUri(uri: String?) {
         outPutUri = uriOrNull(uri)

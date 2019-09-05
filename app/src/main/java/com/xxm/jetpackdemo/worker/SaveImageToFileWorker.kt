@@ -35,6 +35,7 @@ class SaveImageToFileWorker(ctx: Context, parameters: WorkerParameters): Worker(
 
         val resolver = applicationContext.contentResolver
         return try {
+            // 获取从外部传入的参数
             val resourceUri = inputData.getString(KEY_IMAGE_URI)
             val bitmap = BitmapFactory.decodeStream(
                 resolver.openInputStream(Uri.parse(resourceUri)))
